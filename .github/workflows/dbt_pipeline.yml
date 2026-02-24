@@ -31,6 +31,7 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
+          cd dbt_project
           dbt deps
           dbt seed --profiles-dir .
           dbt run --profiles-dir .
