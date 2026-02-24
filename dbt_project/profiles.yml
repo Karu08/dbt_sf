@@ -1,0 +1,23 @@
+dbt_project:
+  outputs:
+    dev:
+      account: btgcmho-kv08408
+      database: snowflake_learning_db
+      password: Welcomepresidio2026
+      role: accountadmin
+      schema: rud_schema_dev
+      threads: 10
+      type: snowflake
+      user: jaga2026q1
+      warehouse: snowflake_learning_wh
+    prod:
+      account: btgcmho-kv08408
+      database: snowflake_learning_db
+      password: Welcomepresidio2026
+      role: accountadmin
+      schema: rud_schema_prod
+      threads: 10
+      type: snowflake
+      user: jaga2026q1
+      warehouse: snowflake_learning_wh
+  target: dev
