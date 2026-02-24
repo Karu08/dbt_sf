@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install dbt-snowflake==1.11.0
+          pip install dbt-snowflake==1.10.2
 
       - name: Run dbt
         env:
