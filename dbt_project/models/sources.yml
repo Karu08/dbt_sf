@@ -1,41 +1,17 @@
 version: 2
 
 sources:
-  - name: stock_data
-    database: STOCK_TRACKING_US_STOCK_PRICES_BY_DAY
-    schema: STOCK
-    tables:
-      - name: US_STOCK_METRICS
-        description: "US stock market trading data"
-        columns:
-          - name: RUN_DATE
-            description: "Date of the stock metrics"
-            tests:
-              - not_null
-          - name: TICKER
-            description: "Stock ticker symbol"
-            tests:
-              - not_null
-          - name: OPEN
-            description: "Opening price"
-          - name: HIGH
-            description: "Highest price"
-          - name: LOW
-            description: "Lowest price"
-          - name: CLOSE
-            description: "Closing price"
-          - name: VOLUME
-            description: "Trading volume"
 
+  # Forex data (Marketplace)
   - name: forex_data
-    database: FOREX_TRACKING_CURRENCY_EXCHANGE_RATES_BY_DAY
-    schema: STOCK
+    database: SNOWFLAKE_PUBLIC_DATA_FOREIGN_EXCHANGE_RATES
+    schema: PUBLIC_DATA
     tables:
-      - name: FOREX_METRICS
-        description: "Foreign exchange rates data"
+      - name: FX_RATES_TIMESERIES
+        description: "Foreign exchange rates time series data"
         columns:
           - name: RUN_DATE
-            description: "Date of the forex metrics"
+            description: "Date of the FX rate"
             tests:
               - not_null
           - name: CURRENCY_PAIR_NAME
@@ -51,15 +27,12 @@ sources:
           - name: CLOSE
             description: "Closing rate"
 
+  # Trading book data
   - name: trading_data
-    database: |
-      {%- if  target.name == "dev" -%} dbt_hol_2025_dev
-      {%- elif target.name == "prod"  -%} dbt_hol_2025_prod
-      {%- else -%} invalid_database
-      {%- endif -%}
-    schema: public
+    database: SNOWFLAKE_LEARNING_DB
+    schema: RUD_SCHEMA
     tables:
-      - name: trading_books
+      - name: TRADING_BOOKS      # exact table name
         description: "Trading book data"
         columns:
           - name: TRADE_ID
@@ -86,15 +59,12 @@ sources:
           - name: NOTES
             description: "Trade notes and comments"
 
+  # Portfolio weights data
   - name: portfolio_data
-    database: |
-      {%- if  target.name == "dev" -%} dbt_hol_2025_dev
-      {%- elif target.name == "prod"  -%} dbt_hol_2025_prod
-      {%- else -%} invalid_database
-      {%- endif -%}
-    schema: public
+    database: SNOWFLAKE_LEARNING_DB
+    schema: RUD_SCHEMA
     tables:
-      - name: weights_table
+      - name: WEIGHTS_TABLE       # exact table name
         description: "Portfolio target allocations by region and desk"
         columns:
           - name: REGION
@@ -108,4 +78,4 @@ sources:
           - name: TARGET_ALLOCATION
             description: "Target portfolio allocation"
             tests:
-              - not_null 
+              - not_null
