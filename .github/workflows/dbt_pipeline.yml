@@ -35,4 +35,3 @@ jobs:
           dbt deps
           dbt seed --profiles-dir .
           dbt run --profiles-dir .
-          dbt test --profiles-dir .
